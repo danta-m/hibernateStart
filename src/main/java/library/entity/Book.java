@@ -15,9 +15,6 @@ public class Book {
     private String genre;
     private int year;
 
-    public Book() {
-    }
-
     public int getId() {
         return id;
     }

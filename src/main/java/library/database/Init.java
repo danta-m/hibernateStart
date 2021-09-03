@@ -22,5 +22,4 @@ public class Init {
         factory.openSession();
         return factory.openSession();
     }
-
 }
