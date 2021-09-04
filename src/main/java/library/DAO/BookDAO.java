@@ -9,9 +9,13 @@ public interface BookDAO {
 
     Book update(Book book);
 
-    Book getBookById(int id);
+    Book findById(int id);
 
     List<Book> getBookList();
 
-    Book delete(Book book);
+    Book delete(int id);
+
+    Book findBookByIdWithHQL(int id);
+
+    List<Book> findBookByAuthorWithHQL(String author);
 }

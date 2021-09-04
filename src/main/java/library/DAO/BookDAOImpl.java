@@ -12,6 +12,7 @@ import static library.Main.initDB;
 
 public class BookDAOImpl {
     public static class BookDaoImpl implements BookDAO {
+
         @Override
         public Book save(Book book) {
             Session session = initDB.getSession();
@@ -33,16 +34,46 @@ public class BookDAOImpl {
         }
 
         @Override
-        public Book getBookById(int id) {
+        public Book findById(int id) {
             Session session = initDB.getSession();
             session.beginTransaction();
-            Book idFilter = session.get(Book.class, id);
+            Book book= session.load(Book.class, new Integer(id));
             session.getTransaction().commit();
             session.close();
-            return idFilter;
+            return book;
         }
 
         @Override
+        public Book findBookByIdWithHQL(int id) {
+            Session session = initDB.getSession();
+            session.beginTransaction();
+            Query<Book> query = session.createQuery("select book from Book book where book.id=:id");
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        }
+
+       
+//        @Override
+//        public Book findBookByAuthorWithHQL(String author) {
+//            Session session = initDB.getSession();
+//            session.beginTransaction();
+//            Query<Book> query = session.createQuery("select book from Book book where book.author=:author");
+//            query.setParameter("author", author);
+//            return query.getSingleResult();
+//        }
+//        
+
+        @Override
+        public List<Book> findBookByAuthorWithHQL(String author) {
+            Session session = initDB.getSession();
+            session.beginTransaction();
+            Query <Book> query = session.createQuery("select book from Book book where book.author=:author");
+            query.setParameter("author", author);
+            return query.list();
+        }
+        
+        @Override
+        @SuppressWarnings("unchecked")
         public List<Book> getBookList() {
             Session session = initDB.getSession();
             session.beginTransaction();
@@ -53,20 +84,35 @@ public class BookDAOImpl {
             cq.select(root);
             Query query = session.createQuery(cq);
             List<Book> bookList = query.getResultList();
+//            List<Book> bookList = session.createQuery("from Book").list();
             session.getTransaction().commit();
             session.close();
             return bookList;
         }
 
         @Override
-        public Book delete(Book book) {
+        public Book delete(int id) {
             Session session = initDB.getSession();
             session.beginTransaction();
-            session.delete(book);
+            Book book= session.load(Book.class, new Integer(id));
+            if (book!= null) {
+                session.delete(book);
+            }
             session.getTransaction().commit();
             session.close();
             return book;
         }
 
+        
+        /*
+public Author getAuthorByIdWithCriteria(Integer id) {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Author> criteriaQuery = builder.createQuery(Author.class);
+        Root<Author> root = criteriaQuery.from(Author.class);
+        criteriaQuery.where(builder.equal(root.get("id"), id));
+        TypedQuery<Author> authorTypedQuery = session.createQuery(criteriaQuery);
+        return authorTypedQuery.getSingleResult();
+    }
+ */
     }
 }
