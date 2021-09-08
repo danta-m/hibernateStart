@@ -34,17 +34,17 @@ public class BookDAOImpl {
         }
 
         @Override
-        public Book findById(int id) {
+        public Book findById(long id) {
             Session session = initDB.getSession();
             session.beginTransaction();
-            Book book= session.load(Book.class, new Integer(id));
+            Book book= session.load(Book.class, new Long(id));
             session.getTransaction().commit();
             session.close();
             return book;
         }
 
         @Override
-        public Book findBookByIdWithHQL(int id) {
+        public Book findBookByIdWithHQL(long id) {
             Session session = initDB.getSession();
             session.beginTransaction();
             Query<Book> query = session.createQuery("select book from Book book where book.id=:id");
@@ -91,10 +91,10 @@ public class BookDAOImpl {
         }
 
         @Override
-        public Book delete(int id) {
+        public Book delete(long id) {
             Session session = initDB.getSession();
             session.beginTransaction();
-            Book book= session.load(Book.class, new Integer(id));
+            Book book= session.load(Book.class, new Long(id));
             if (book!= null) {
                 session.delete(book);
             }

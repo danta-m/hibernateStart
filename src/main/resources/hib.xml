@@ -6,15 +6,17 @@
     <session-factory>
         <property name = "hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name = "hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name = "hibernate.connection.url">jdbc:mysql://localhost:3306/library</property>
+        <property name = "hibernate.connection.url">jdbc:mysql://localhost:3306/Library</property>
         <property name = "hibernate.connection.username">root</property>
         <property name = "hibernate.connection.password">admin</property>
         <property name="connection.pool_size">100</property>
 
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">create-drop</property>
         <property name="show_sql">true</property>
 
         <mapping class="library.entity.Book"/>
+        <mapping class="library.entity.User"/>
+
 
     </session-factory>
 </hibernate-configuration>

@@ -9,13 +9,13 @@ public interface BookDAO {
 
     Book update(Book book);
 
-    Book findById(int id);
+    Book findById(long id);
 
     List<Book> getBookList();
 
-    Book delete(int id);
+    Book delete(long id);
 
-    Book findBookByIdWithHQL(int id);
+    Book findBookByIdWithHQL(long id);
 
     List<Book> findBookByAuthorWithHQL(String author);
 }

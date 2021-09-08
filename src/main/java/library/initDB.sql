@@ -1,7 +1,7 @@
 CREATE DATABASE library;
 USE library;
 
-CREATE TABLE books
+CREATE TABLE book
 (
     id INT PRIMARY KEY,
     title VARCHAR(200),
