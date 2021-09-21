@@ -1,5 +1,6 @@
 package library.DAO;
 
+import library.entity.Author;
 import library.entity.Book;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface BookDAO {
 
     Book findBookByIdWithHQL(long id);
 
-    List<Book> findBookByAuthorWithHQL(String author);
+    List<Book> findBookByAuthorWithHQL(long id);
 }

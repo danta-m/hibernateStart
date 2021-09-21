@@ -10,9 +10,7 @@ import javax.persistence.criteria.Root;
 
 import static library.Main.initDB;
 
-public class BookDAOImpl {
-    public static class BookDaoImpl implements BookDAO {
-
+public class BookDAOImpl implements BookDAO {
         @Override
         public Book save(Book book) {
             Session session = initDB.getSession();
@@ -64,11 +62,11 @@ public class BookDAOImpl {
 //        
 
         @Override
-        public List<Book> findBookByAuthorWithHQL(String author) {
+        public List<Book> findBookByAuthorWithHQL(long id) {
             Session session = initDB.getSession();
             session.beginTransaction();
-            Query <Book> query = session.createQuery("select book from Book book where book.author=:author");
-            query.setParameter("author", author);
+            Query <Book> query = session.createQuery("select book from Book book where book.id=:id");
+            query.setParameter("id", id);
             return query.list();
         }
         
@@ -114,5 +112,4 @@ public Author getAuthorByIdWithCriteria(Integer id) {
         return authorTypedQuery.getSingleResult();
     }
  */
-    }
 }

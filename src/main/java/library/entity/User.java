@@ -14,9 +14,10 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column
     private String userName;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Book> book;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Book> books;
 
     public User() {
     }

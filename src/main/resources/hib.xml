@@ -16,6 +16,7 @@
 
         <mapping class="library.entity.Book"/>
         <mapping class="library.entity.User"/>
+        <mapping class="library.entity.Author"/>
 
 
     </session-factory>
